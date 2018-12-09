@@ -3,18 +3,5 @@
   become: no
 
   tasks:
-  - name: Unmount home
-    mount:
-      path: /home
-      src: "{{ gluster.disk }}"
-      state: absent
-    register: result
-  - name: Reboot the server and wait for it to come back up.
-    reboot:
-    when: result.changed
-  - name: Create a cfs filesystem on {{ gluster.disk }}
-    filesystem:
-      fstype: xfs
-      dev: "{{ gluster.disk }}"
-      opts: -i size=512
-      force: "{{ gluster.forcedisk }}"
+    - include: disks.1.yml disk={{ item.value['disk'] }} dir={{ item.value['dir'] }} force={{ item.value['force'] }}
+      with_dict: "{{ gluster.bricks }}"

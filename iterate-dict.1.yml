@@ -1,0 +1,20 @@
+# Ansible Playbook
+# Iterates trough a dictionary
+
+- hosts: servers
+  vars:
+    gluster:
+      bricks:
+        brick:
+          disk: /dev/dev2
+          force: No
+          dir: /data/gluster/brick1
+        brick:
+          disk: /dev/dev3
+          force: No
+          dir: /data/gluster/brick1
+  tasks:
+  - name: Iterate over list
+    debug: "msg=val={{ item.value['disk'] }}"
+    with_dict: "{{ gluster.bricks }}"
+    delegate_to: localhost
