@@ -1,0 +1,18 @@
+- hosts: servers
+
+  vars:
+    kubernetes_allow_pods_on_master: True
+  tasks:
+    - name: copy grub
+      copy:
+        src: ./grub
+        dest: /etc/default/grub
+        owner: root
+        group: root
+        mode: 0644
+    - name: update grub
+      command: update-grub
+    - name: update grub2
+      command: update-grub2
+    - name: reboot server
+      command: reboot
