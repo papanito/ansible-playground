@@ -1,7 +1,5 @@
-# Ansible Playbook
-# Iterates trough a dictionary
-
-- hosts: servers
+- name: Iterates trough a dictionary
+  hosts: servers
   vars:
     gluster:
       bricks:

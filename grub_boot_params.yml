@@ -1,7 +1,6 @@
-- hosts: servers
+- name: Update grub config
+  hosts: servers
 
-  vars:
-    kubernetes_allow_pods_on_master: True
   tasks:
     - name: copy grub
       copy:

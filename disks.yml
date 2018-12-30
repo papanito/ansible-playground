@@ -1,7 +1,0 @@
----
-- hosts: gluster
-  become: no
-
-  tasks:
-    - include: disks.1.yml disk={{ item.value['disk'] }} dir={{ item.value['dir'] }} force={{ item.value['force'] }}
-      with_dict: "{{ gluster.bricks }}"

@@ -1,7 +1,5 @@
-# Ansible Playbook
-# Checks for which init system is used on the hosts
-
-- hosts: servers
+- name: Checks for which init system is used on the hosts
+  hosts: servers
   tasks:
   - name: Check init system
     shell: cat /proc/1/status | grep '[Nn]ame'|sed 's/[Nn]ame:\s*//'
