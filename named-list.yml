@@ -1,0 +1,31 @@
+- name: Iterates trough a dictionary
+  hosts: servers
+  gather_facts: false
+  vars:
+    rsyslog_tls:       true
+    rsyslog_tag:       syslog
+    rsyslog_srv:       loggly.com
+    rsyslog_cert:      syslogca.crt
+    rsyslog_cert_path: /etc/rsyslog.d/keys/ca.d
+    services:
+      loggly:
+        token:      YOUR_TOKEN_GOES_HERE
+        peer:       "*.loggly.com"
+        url:        logs-01.loggly.com
+        port:       514
+        port_tls:   6514
+      logzio:
+        token:      YOUR_TOKEN_GOES_HERE
+        peer:       "*.logz.io"
+        url:        logs-01.loggly.com
+        port:       514
+        port_tls:   6514
+
+  tasks:
+  - name: Iterate over list
+    debug: "msg=val={{ item.value.token }}"
+    with_dict: "{{ services }}"
+    delegate_to: localhost
+  - name: List specifc items
+    debug: "msg=val={{ services['loggly'].peer }}"
+  
