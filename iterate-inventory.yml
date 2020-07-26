@@ -13,4 +13,3 @@
   - debug: msg="{{ item }}"
     with_items: "{{ groups['all'] }}"
     delegate_to: localhost
-  
