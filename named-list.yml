@@ -1,5 +1,5 @@
 - name: Iterates trough a dictionary
-  hosts: servers
+  hosts: localhost
   gather_facts: false
   vars:
     rsyslog_srv:       logz.io # set this to use the correct service
@@ -30,6 +30,6 @@
     debug: "msg=val={{ item.value.token }}"
     with_dict: "{{ services }}"
     delegate_to: localhost
-  - name: List specifc items
+  - name: List specific items
     debug: "msg=val={{ services[rsyslog_srv].cert_path }}"
   
